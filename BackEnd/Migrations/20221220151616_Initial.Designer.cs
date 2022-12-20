@@ -12,7 +12,7 @@ using Produts.api.Data;
 namespace Produts.api.Migrations
 {
     [DbContext(typeof(ProductsContext))]
-    [Migration("20221220144231_Initial")]
+    [Migration("20221220151616_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,9 +38,8 @@ namespace Produts.api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
