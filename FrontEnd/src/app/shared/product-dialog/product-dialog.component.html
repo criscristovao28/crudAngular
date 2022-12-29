@@ -1,0 +1,21 @@
+<h1 *ngIf="!isUpdating" mat-dialog-title>Cadastrar Produto</h1>
+<h1 *ngIf="isUpdating" mat-dialog-title>Actualizar Produto</h1>
+<div mat-dialog-content>
+    <mat-form-field >
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field >
+        <mat-label>Preco</mat-label>
+        <input type="number" matInput [(ngModel)]="data.price">
+    </mat-form-field>
+    <mat-form-field >
+        <mat-label>Categoria</mat-label>
+        <input type="number" matInput [(ngModel)]="data.category">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button *ngIf="!isUpdating" mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Cadastrar</button>
+    <button *ngIf="isUpdating" mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Actualizar</button>
+</div>
