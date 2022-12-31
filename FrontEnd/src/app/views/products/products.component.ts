@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Router } from '@angular/router';
 import Product from 'src/app/models/Product';
+import { LoginService } from 'src/app/services/login.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProductDialogComponent } from 'src/app/shared/product-dialog/product-dialog.component';
 
@@ -9,7 +11,7 @@ import { ProductDialogComponent } from 'src/app/shared/product-dialog/product-di
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  providers: [ProductsService]
+  providers: [ProductsService, LoginService]
 })
 export class ProductsComponent implements OnInit {
 
@@ -17,13 +19,17 @@ export class ProductsComponent implements OnInit {
   table!: MatTable<any>
 
   products: Product[] = [];
-
   displayedColumns: string[] = ['name', 'price', 'category', 'actions']
 
   constructor(
-    public dialog: MatDialog,
-    public productService: ProductsService
+    private dialog: MatDialog,
+    private productService: ProductsService,
+    private loginService: LoginService,
+    private router: Router
   ) {
+
+    if(!loginService.ifLogeddIn())
+    this.router.navigate(['login'])
     this.get();
   }
 

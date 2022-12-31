@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Produts.api.Data;
@@ -8,6 +9,7 @@ namespace Produts.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly ProductsContext _context;
@@ -18,6 +20,7 @@ namespace Produts.api.Controllers
         }
 
         [HttpGet]
+        //[Authorize]
         public async Task<ActionResult> getProducts()
         {
             return Ok(await _context.Products.ToListAsync());
@@ -25,6 +28,7 @@ namespace Produts.api.Controllers
 
 
         [HttpPost]
+        //[Authorize]
         public async Task<ActionResult> Post(Product product)
         {
            await _context.Products.AddAsync(product);
@@ -34,6 +38,7 @@ namespace Produts.api.Controllers
 
 
         [HttpPut]
+        //[Authorize]
         public async Task<ActionResult> Put(Product product)
         {
             var dbproduct =await _context.Products.FindAsync(product.Id);
@@ -49,6 +54,7 @@ namespace Produts.api.Controllers
         }
 
         [HttpDelete]
+        //[Authorize]
         public async Task<ActionResult> Delete(Guid Id)
         {
             var dbproduct = await _context.Products.FindAsync(Id);
